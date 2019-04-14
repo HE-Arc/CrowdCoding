@@ -1,7 +1,7 @@
-package ch.arc.crowdcoding.auth.service;
+package ch.arc.crowdcoding.service;
 
-import ch.arc.crowdcoding.auth.model.User;
-import ch.arc.crowdcoding.auth.repository.UserRepository;
+import ch.arc.crowdcoding.model.User;
+import ch.arc.crowdcoding.repository.UserRepository;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,10 +24,10 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByName(username);
         if (user == null) throw new UsernameNotFoundException(username);
 
         
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), grantedAuthorities);
     }
 }

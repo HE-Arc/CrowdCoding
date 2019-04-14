@@ -1,4 +1,4 @@
-package ch.arc.crowdcoding.auth.service;
+package ch.arc.crowdcoding.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

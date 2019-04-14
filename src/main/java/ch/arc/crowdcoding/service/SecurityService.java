@@ -1,4 +1,4 @@
-package ch.arc.crowdcoding.auth.service;
+package ch.arc.crowdcoding.service;
 
 public interface SecurityService {
 	String findLoggedInUsername();
