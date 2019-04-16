@@ -34,6 +34,13 @@ public class HomeController {
         return "greeting";
     }
     
+    @GetMapping("/me/snippets")
+    public String getUserSnippets()
+    {
+    	return "user-snippets";
+    }
+   
+    
 	@GetMapping("/all")
 	public @ResponseBody Iterable<User> getAllUsers() {
 		// This returns a JSON or XML with the users
