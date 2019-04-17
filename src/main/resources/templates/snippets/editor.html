@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Snippet Editor</title>
+</head>
+<body>
+<div th:insert="fragments/base :: base"></div>
+<div th:insert="fragments/header :: header"></div>
+
+	<div id="editor">function foo(items) {
+	    var x = "All this is syntax highlighted";
+	    return x;
+	}</div>
+	<div th:insert="fragments/footer :: footer"></div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.3/ace.js" integrity="sha256-gkWBmkjy/8e1QUz5tv4CCYgEtjR8sRlGiXsMeebVeUo=" crossorigin="anonymous"></script>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/javascript");
+</script>
+
+</html>

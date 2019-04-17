@@ -20,4 +20,12 @@ public class SnippetController {
 	{
 		return "snippets/new";
 	}
+	
+	@RequestMapping("/editor")
+	public String getEditorSnippetForm()
+	{
+		
+		return "snippets/editor";
+	}
+	
 }
