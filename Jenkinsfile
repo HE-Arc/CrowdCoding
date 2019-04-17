@@ -2,9 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build') { 
+            agent {
+              docker {
+               image 'maven:3-alpine'
+              }
+            }
             steps {
-                echo 'Building..'
+				sh '(mvn clean package)'
+				stash name: "app", includes: "**"
+
             }
         }
         stage('QualityTest')
