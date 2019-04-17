@@ -23,6 +23,9 @@ public class CodeSnippet {
 	@Column(name="codeSnippet_id")
 	private int id;
 	
+	@Column(name = "name")
+	private String name;
+	
 	@Lob
 	@Column(name = "content")
 	private String content;
