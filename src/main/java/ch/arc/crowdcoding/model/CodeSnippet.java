@@ -46,6 +46,34 @@ public class CodeSnippet {
 	@Column(name = "accessibility")
 	String accessibility;
 	
+	public User getOwner() {
+		return owner;
+	}
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+	
+	public String getLanguage() {
+		return language;
+	}
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	
+	public String getAccessibility() {
+		return accessibility;
+	}
+	public void setAccessibility(String accessibility) {
+		this.accessibility = accessibility;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String getContent() {
 		return content;
 	}
@@ -56,9 +84,4 @@ public class CodeSnippet {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	
 }
