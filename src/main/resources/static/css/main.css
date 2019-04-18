@@ -1,7 +1,16 @@
+body
+{
+	padding-bottom: 120px;
+}
+
 footer {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   text-align: center;
+}
+
+.left-buffer { 
+	margin-left:20px;
 }

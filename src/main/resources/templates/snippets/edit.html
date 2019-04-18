@@ -2,37 +2,79 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.3/ace.js"
+	integrity="sha256-gkWBmkjy/8e1QUz5tv4CCYgEtjR8sRlGiXsMeebVeUo="
+	crossorigin="anonymous"></script>
 <head>
-	<title>Snippet Editor</title>
+<title>Snippet Editor</title>
+
+<style type="text/css" media="screen">
+.ace_editor {
+	border: 1px solid lightgray;
+	margin: auto;
+	height: 200px;
+	width: 80%;
+	font-size: 16px;
+}
+
+.scrollmargin {
+	height: 80px;
+	text-align: center;
+}
+</style>
+
+
 </head>
 <body>
 	<div th:insert="fragments/header :: header"></div>
-	
-	<p>
-		Snippet name:
-		<input type="text" th:value="${snippet.name}"/>
-	</p>
-	<p>
-		Snippet language:
-		<input type="text" th:value="${snippet.language}"/>
-	</p>
-	<p>
-		Snippet accessibility:
-		<input type="text" th:value="${snippet.accessibility}"/>
-	</p>
-	
-	<p style="float: right;">
-		Code:
-		<textarea rows="10" cols="60" th:value="${snippet.content}"></textarea>
-	</p>
-	
-	<button>Save</button>
-	<button>Execute</button>
-	
-	<div>Execution result...</div>
-	
-	<div th:insert="fragments/footer :: footer"></div>
+
+	<div class="container">
+		<div class="form-group">
+			<p>
+				<label for="snippetName">Name</label> <input type="text"
+					class="form-control" id="snippetName" th:value="${snippet.name}">
+			</p>
+			<p>
+				<label for="snippetLanguage">Language</label> <input type="text"
+					class="form-control" id="snippetLanguage"
+					th:value="${snippet.language}">
+			</p>
+			<p>
+				<label for="snippetAccessibility">Accessibility</label> <input
+					type="text" class="form-control" id="snippetAccessiblity"
+					th:value="${snippet.accessibility}">
+			</p>
+		</div>
+
+
+	</div>
+	<div class="container">
+		<pre id="editor1" th:text="${snippet.content}"></pre>
+		<div class="scrollmargin"></div>
+
+		<div class="row">
+			<button class="col-sm-2 offset-md-3 btn btn-primary">Save</button>
+			<button class="col-sm-2 offset-md-2	 btn btn-primary">Execute</button>
+		</div>
+
+		<label for="executionOutput" class="display-4">Output</label>
+		<div class="bg-light" id="executionOutput">None</div>
+
+		<div th:insert="fragments/footer :: footer"></div>
+	</div>
+
+
 </body>
+<script>
+	var editor1 = ace.edit("editor1", {
+		theme : "ace/theme/monokai",
+		mode : "ace/mode/python",
+		minLines : 15,
+		maxLines : 30,
+		wrap : true,
+		autoScrollEditorIntoView : true
+	});
+</script>
 
 
 </html>
