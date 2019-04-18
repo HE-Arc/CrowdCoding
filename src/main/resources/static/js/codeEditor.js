@@ -8,6 +8,7 @@ $(document).ready(function() {
 	})
 	
 	function executeCode(snippetId) {
+		saveCode();
 		$.ajax({
 			url : window.location.origin+'/snippets/' + snippetId + '/execute',
 			type : 'GET',
@@ -23,15 +24,19 @@ $(document).ready(function() {
 		snippetId = $("input[name=snippetId]").val();
 		name = $("#snippetName").val();
 		language = $("#snippetLanguage").val();
-		accessibility = $("#snippetAccessibility").val();
-		ownerId = $("input[name=owner]").val();
-		content = $("#editor1").text();
-		content = content.substring(0, content.indexOf('ה'));
+		accessibility = $("#snippetAccessiblity").val();
+		ownerId = $("input[name=ownerId]").val();
+		content = editor1.getValue();
+		
 		
 		console.log(content);
 		console.log(snippetId);
+		console.log(language);
+		console.log(accessibility);
+		console.log(ownerId);
+		console.log(name);
 		
-		/*$.ajax({
+		$.ajax({
 			url : window.location.origin+'/snippets/save',
 			type : 'POST',
 			dataType : 'html',
@@ -39,6 +44,6 @@ $(document).ready(function() {
 			success : function(data) {
 				console.log("Snippet saved.");
 			}
-		});*/
+		});
 	}
 });
