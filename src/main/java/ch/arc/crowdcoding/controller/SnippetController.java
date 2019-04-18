@@ -97,7 +97,6 @@ public class SnippetController {
 		return null;// "snippets/"+snippet.getId()+"/edit";
 	}
 	
-	
 	@RequestMapping("/{id}/edit")
 	public ModelAndView getEditorSnippetForm(@PathVariable(value="id") Integer id)
 	{
