@@ -4,6 +4,7 @@ import ch.arc.crowdcoding.model.User;
 
 public interface UserService {
 	public User findUserByName(String name);
+	public User findUserById(Integer id);
 	public void saveUser(User user);
 	public Iterable<User> findAll();
 }

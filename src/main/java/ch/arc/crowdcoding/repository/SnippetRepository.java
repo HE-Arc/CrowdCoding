@@ -15,5 +15,6 @@ import ch.arc.crowdcoding.model.User;
 public interface SnippetRepository extends PagingAndSortingRepository<CodeSnippet, Integer> {
 	
 	Page<CodeSnippet> findByOwner(User owner, Pageable pageable);
+	Page<CodeSnippet> findByAccessibility(String accessibility, Pageable pageable);
 	
 }
