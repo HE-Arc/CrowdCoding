@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ch.arc.crowdcoding.model.CodeSnippet;
+import ch.arc.crowdcoding.model.Language;
 import ch.arc.crowdcoding.model.User;
 import ch.arc.crowdcoding.repository.SnippetRepository;
 
@@ -29,7 +30,7 @@ public class SnippetServiceImpl implements SnippetService {
 	}
 
 	@Override
-	public CodeSnippet createNewSnippet(User owner, String name, String language, String accessibility) {
+	public CodeSnippet createNewSnippet(User owner, String name, Language language, String accessibility) {
 		CodeSnippet snippet = new CodeSnippet();
 		
 		snippet.setOwner(owner);
@@ -45,7 +46,7 @@ public class SnippetServiceImpl implements SnippetService {
 	}
 
 	@Override
-	public CodeSnippet updateSnippet(Integer id, String name, String content, User owner, String language, String accessibility) {
+	public CodeSnippet updateSnippet(Integer id, String name, String content, User owner, Language language, String accessibility) {
 		CodeSnippet snippet = findById(id);
 
 		if(snippet == null)
@@ -70,5 +71,10 @@ public class SnippetServiceImpl implements SnippetService {
 			return oSnippet.get();
 		else
 			return null;
+	}
+
+	@Override
+	public Page<CodeSnippet> findAll(Pageable pageable) {
+		return snippetRepository.findAll(pageable);
 	}
 }

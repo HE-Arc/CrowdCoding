@@ -13,9 +13,7 @@
       	<input type="text" placeholder="Name of the Snippet" class="u-full-width" name="snippet_name" />
 		
 		<select name="snippet_language">
-			<option value="" disabled selected>Language of the Snippet</option>
-		    <option th:value="'Python'" th:text="Python"></option>
-		    <option th:value="'TP4'" th:text="TP4"></option>
+			<option th:each="language : ${languages}" th:value="${language.language}" th:text="${language.language}"></option>
 		</select>
 		
 		<select name="snippet_accessibility">

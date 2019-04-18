@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import ch.arc.crowdcoding.model.CodeSnippet;
 import ch.arc.crowdcoding.model.User;
+import ch.arc.crowdcoding.service.LanguageService;
 import ch.arc.crowdcoding.service.SecurityService;
 import ch.arc.crowdcoding.service.SnippetService;
 import ch.arc.crowdcoding.repository.SnippetRepository;
@@ -42,13 +43,18 @@ public class SnippetController {
 	@Autowired
 	private SecurityService securityService;
 	
+	@Autowired
+	private LanguageService languageService;
+	
+	
+	
 
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView snippetsList()
 	{
 		
 		Pageable pageable = PageRequest.of(0, 10, Sort.by("createdAt").descending());
-    	Page<CodeSnippet> snippets = snippetService.findByAccessibility("public", pageable);
+    	Page<CodeSnippet> snippets = snippetService.findByAccessibility("Public", pageable);
     	
     	ModelAndView mav = new ModelAndView("snippets/list");
     	mav.addObject("snippets", snippets);
@@ -61,6 +67,7 @@ public class SnippetController {
 	{
 		ModelAndView mav = new ModelAndView("snippets/new");
 		mav.addObject("newCodeSnippet", new CodeSnippet());
+		mav.addObject("languages", languageService.findAll());
 		
 		return mav;
 	}
@@ -78,7 +85,7 @@ public class SnippetController {
 		String currentPrincipalName = authentication.getName();
 		User currentUser = userService.findUserByName(currentPrincipalName);
     	
-    	CodeSnippet snippet = snippetService.createNewSnippet(currentUser, name, language, accessibility);
+    	CodeSnippet snippet = snippetService.createNewSnippet(currentUser, name, languageService.findByLanguage(language), accessibility);
 		
 		return new RedirectView("/snippets/"+snippet.getId()+"/edit");
 	}
@@ -89,7 +96,7 @@ public class SnippetController {
 								@RequestParam("snippet_language") String language, @RequestParam("snippet_accessibility") String access)
 	{    	
 		
-		CodeSnippet snippet= snippetService.updateSnippet(id, name, content, userService.findUserById(id), language, access);
+		CodeSnippet snippet= snippetService.updateSnippet(id, name, content, userService.findUserById(id), languageService.findByLanguage(language), access);
 		
 		if(snippet==null)
 			return new ModelAndView("error/404"); 
