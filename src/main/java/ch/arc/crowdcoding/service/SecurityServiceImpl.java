@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 
 import ch.arc.crowdcoding.model.User;
@@ -48,10 +49,5 @@ public class SecurityServiceImpl implements SecurityService {
 			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 			logger.debug(String.format("Auto login %s successfully!", username));
 		}
-	}
-
-	@Override
-	public User findLoggedInUser() {
-		return userService.findUserByName(findLoggedInUsername());
 	}
 }

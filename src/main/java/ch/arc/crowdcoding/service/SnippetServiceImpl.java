@@ -1,5 +1,6 @@
 package ch.arc.crowdcoding.service;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,15 @@ public class SnippetServiceImpl implements SnippetService {
 	}
 
 	@Override
-	public CodeSnippet createNewSnippet(User owner, String language, String accessibility) {
+	public CodeSnippet createNewSnippet(User owner, String name, String language, String accessibility) {
 		CodeSnippet snippet = new CodeSnippet();
 		
 		snippet.setOwner(owner);
 		snippet.setAccessibility(accessibility);
 		snippet.setLanguage(language);
+		snippet.setName(name);
+		snippet.setCreateAt(new Date());
+		snippet.setModifiedAt(new Date());
 		
 		snippetRepository.save(snippet);
 		
@@ -52,6 +56,7 @@ public class SnippetServiceImpl implements SnippetService {
 		snippet.setAccessibility(accessibility);
 		snippet.setLanguage(language);
 		snippet.setName(name);
+		snippet.setModifiedAt(new Date());
 		
 		snippetRepository.save(snippet);
 		return snippet;

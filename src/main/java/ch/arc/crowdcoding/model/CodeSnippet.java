@@ -1,6 +1,6 @@
 package ch.arc.crowdcoding.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.Temporal;
 
 @Entity
 @Table(name = "codeSnippet")
@@ -37,11 +38,13 @@ public class CodeSnippet {
     @JoinColumn
     private User owner;
 	
-	@CreatedDate
-    Date created_at;
+	//@CreatedDate
+	@Column(name = "createdAt")
+    private Date createdAt;
 	
-	@LastModifiedDate
-    Date modified_at;
+	//@LastModifiedDate
+	@Column
+    private Date modifiedAt;
 	
 	@Column(name = "language")
 	String language;
@@ -75,6 +78,20 @@ public class CodeSnippet {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreateAt(Date date) {
+		this.createdAt = date;
+	}
+	
+	public Date getModifiedAt() {
+		return modifiedAt;
+	}
+	public void setModifiedAt(Date date) {
+		this.modifiedAt = date;
 	}
 	
 	public String getContent() {
