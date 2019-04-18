@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Admin Page</title>
+</head>
+
+<body>
+<div th:insert="fragments/header :: header"></div>
+	<div class="container">
+		<table>
+            <thead>
+                <tr>
+                    <th> Language</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="language : ${languages}">
+                    <!-- <td><input th:field="${language.language}" /></td> -->
+                    <td th:text="${language.language}"></td>
+                </tr>
+            </tbody>
+        </table>
+		
+		<form method="post" action="languages/add">
+	      	<input type="text" placeholder="Name of the Language" class="u-full-width" name="language_name" />
+			
+			<button type="submit" class="button-primary u-full-width">Add language</button>
+		</form>
+	</div>
+	<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

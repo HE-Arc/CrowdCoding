@@ -7,7 +7,29 @@
 <body>
 	<div th:insert="fragments/header :: header"></div>
 	<div class="container">
-	<h1>All Snippets</h1>
+		<h1>All Snippets</h1>
+		
+		<div th:each="snippet : ${snippets}">
+			<a th:href="@{'/snippets/' + ${snippet.id} + '/edit'}" class="btn" style="width: 50%;">
+				<div class="card">	
+					<div class="card-header text-left">
+						<h4 th:text="${snippet.name}"></h4>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col text-left">
+								<span class="font-italic text-muted">Language</span>
+								<p th:text="${snippet.language}"></p>
+							</div>
+							<div class="col">
+								<span class="font-italic text-muted">Author</span>
+								<p th:text="${snippet.owner.name}"></p>
+							</div>
+						</div>
+					</div>
+	        	</div>
+	        </a>
+	    </div>
 	</div>
 	<div th:insert="fragments/footer :: footer"></div>
 </body>

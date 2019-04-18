@@ -13,12 +13,25 @@
 		<h1>My Snippets</h1>
 		
 		<div th:each="snippet : ${snippets}">
-			
-			<p th:text="${snippet.name}"></p>
-			<p th:text="${snippet.language}"></p>
-	        <!--<td th:text="snippet">1</td>
-	        <td><a href="#" th:text="snippet">Title ...</a></td>
-	        <td th:text="${snippet.text}">Text ...</td> -->
+			<a th:href="@{'/snippets/' + ${snippet.id} + '/edit'}" class="btn" style="width: 50%;">
+				<div class="card">
+					<div class="card-header text-left">
+						<h4 th:text="${snippet.name}"></h4>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col text-left">
+								<span class="font-italic text-muted">Language</span>
+								<p th:text="${snippet.language}"></p>
+							</div>
+							<div class="col">
+								<span class="font-italic text-muted">Accessibility</span>
+								<p th:text="${snippet.accessibility}"></p>
+							</div>
+						</div>
+					</div>
+	        	</div>
+	        </a>
 	    </div>
 	</div>
 	<div th:insert="fragments/footer :: footer"></div>

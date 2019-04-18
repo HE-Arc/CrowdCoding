@@ -21,6 +21,7 @@ import org.springframework.data.jpa.repository.Temporal;
 @Entity
 @Table(name = "codeSnippet")
 @EntityListeners(AuditingEntityListener.class)
+
 public class CodeSnippet {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,8 +47,9 @@ public class CodeSnippet {
 	@Column
     private Date modifiedAt;
 	
-	@Column(name = "language")
-	String language;
+	@ManyToOne
+	@JoinColumn
+	Language language;
 	
 	@Column(name = "accessibility")
 	String accessibility;
@@ -59,10 +61,11 @@ public class CodeSnippet {
 		this.owner = owner;
 	}
 	
-	public String getLanguage() {
+	public Language getLanguage() {
 		return language;
 	}
-	public void setLanguage(String language) {
+	
+	public void setLanguage(Language language) {
 		this.language = language;
 	}
 	
@@ -104,4 +107,5 @@ public class CodeSnippet {
 	public int getId() {
 		return id;
 	}
+	
 }
