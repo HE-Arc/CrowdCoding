@@ -34,13 +34,6 @@ public class UserController {
 	@Autowired
 	private SnippetRepository snippetRepository;
     
-	
-//    @GetMapping("/")
-//    public String home() {
-//        return "index";
-//    }
-    
-    
     @RequestMapping(value = "/snippets")
     public ModelAndView getSnippets()
     {
@@ -49,38 +42,22 @@ public class UserController {
     	String currentPrincipal = authentication.getName();
     	User currentUser = userService.findUserByName(currentPrincipal);
     	
-    	Pageable pageable = PageRequest.of(1, 1);
-    	Page<CodeSnippet> snippets = snippetRepository.findByOwner(currentUser, pageable);
     	CodeSnippet c = new CodeSnippet();
     	c.setContent("aajajajajaja");
-    	//c.setD
+    	c.setAccessibility("a");
+    	c.setLanguage("C++");
+    	c.setName("MySnippet");
+    	c.setOwner(currentUser);
+    	//snippetRepository.save(c);
+    	
+    	Pageable pageable = PageRequest.of(0, 1);
+    	Page<CodeSnippet> snippets = snippetRepository.findByOwner(currentUser, pageable);
     	
     	ModelAndView mav = new ModelAndView("user-snippets");
         mav.addObject("snippets", snippets);
         mav.addObject("aa", "asldkmaléskd");
     	
-    	//List<CodeSnippet> lSnippet = SnippetRepository.findAllByOwner(null, null);
-    	//return "user-snippets";
         return mav;
     }
     
-//	@RequestMapping(value="/snippets")
-//	public String snippetsList()
-//	{
-//		return "user-snippets";
-//	}
-    
-    
-//	@GetMapping("/all")
-//	public @ResponseBody Iterable<User> getAllUsers() {
-//		// This returns a JSON or XML with the users
-//		return userService.findAll();
-//	}
-//	
-//	@GetMapping("/show")
-//	public @ResponseBody User getUser(@RequestParam(name="name", required=true) String name) {
-//		// This returns a JSON or XML with the users
-//		return userService.findUserByName(name);
-//	}
-
 }
