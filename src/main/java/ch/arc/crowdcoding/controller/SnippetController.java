@@ -9,18 +9,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import ch.arc.crowdcoding.model.CodeSnippet;
-import ch.arc.crowdcoding.model.User;
 import ch.arc.crowdcoding.repository.SnippetRepository;
+import ch.arc.crowdcoding.service.SnippetExecutionService;
+import org.springframework.web.bind.annotation.RequestParam;
+import ch.arc.crowdcoding.model.User;
 import ch.arc.crowdcoding.service.UserService;
 
 @Controller
@@ -28,11 +31,15 @@ import ch.arc.crowdcoding.service.UserService;
 public class SnippetController {
 	
 	@Autowired
+	private SnippetExecutionService snippetExecutor;
+	
+	@Autowired
 	private SnippetRepository snippetRepository;
 	
 	@Autowired
 	private UserService userService;
 	
+
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView snippetsList()
 	{
@@ -116,4 +123,21 @@ public class SnippetController {
 		return mav;
 	}
 	
+	@RequestMapping(value="{id}/execute", method=RequestMethod.GET, produces = "application/json")
+	@ResponseBody public String executeSnippet(@PathVariable(value="id") Integer id)
+	{
+		Optional<CodeSnippet> codeSnippet = snippetRepository.findById(id);
+		String jsonOutput = "";
+		if(codeSnippet.isPresent())
+			jsonOutput = snippetExecutor.runSnippet(codeSnippet.get());
+		return jsonOutput;
+		/*String codeTxt = "print('asd')";
+				
+		
+		CodeSnippet snippet = new CodeSnippet();
+		snippet.setContent(codeTxt);
+		
+		String output = snippetExecutor.runSnippet(snippet);
+		return output;*/
+	}
 }
