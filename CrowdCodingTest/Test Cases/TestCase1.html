@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>TestCase1</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TestLogin</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/<datalist><option>http://localhost:8080/</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=Login<datalist><option>link=Login</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='My snippets'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='All'])[1]/following::a[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Register'])[1]/preceding::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='here'])[1]/preceding::a[2]</option><option>//a[contains(text(),'Login')]</option><option>//div[@id='navbarSupportedContent']/ul[2]/li/a</option><option>//a[contains(@href, '/login')]</option><option>//ul[2]/li/a</option><option>css=ul.navbar-nav.ml-auto &gt; li.nav-item.active &gt; a.nav-link</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//body<datalist><option>//body</option><option>css=body</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=name<datalist><option>id=name</option><option>name=name</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Welcome'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Go To Registration Page'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Login'])[3]/preceding::input[2]</option><option>//input[@id='name']</option><option>//input</option><option>css=#name</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=name<datalist><option>id=name</option><option>name=name</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Welcome'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Go To Registration Page'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Login'])[3]/preceding::input[2]</option><option>//input[@id='name']</option><option>//input</option><option>css=#name</option></datalist></td><td>Naralas</td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Welcome'])[1]/following::input[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Go To Registration Page'])[1]/following::input[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Login'])[3]/preceding::input[1]</option><option>//input[@id='password']</option><option>//input[2]</option><option>css=#password</option></datalist></td><td>motdepasse1</td>
+</tr>
+<tr><td>click</td><td>name=Submit<datalist><option>name=Submit</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Welcome'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Go To Registration Page'])[1]/following::button[1]</option><option>//button[@name='Submit']</option><option>//div[3]/form/button</option><option>css=button[name="Submit"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=New<datalist><option>link=New</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='(current)'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='All'])[1]/preceding::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='My snippets'])[1]/preceding::a[2]</option><option>//a[contains(text(),'New')]</option><option>//div[@id='navbarSupportedContent']/ul/li[2]/a</option><option>//a[contains(@href, '/snippets/new')]</option><option>//li[2]/a</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TestRegister</td></tr>
+</thead>
+<tbody>
+<tr><td>click</td><td>link=Register<datalist><option>link=Register</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Login'])[1]/following::a[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='My snippets'])[1]/following::a[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Create a snippet'])[1]/preceding::a[1]</option><option>//a[contains(text(),'Register')]</option><option>//div[@id='navbarSupportedContent']/ul[2]/li[2]/a</option><option>//a[contains(@href, '/registration')]</option><option>//ul[2]/li[2]/a</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=name<datalist><option>id=name</option><option>name=name</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Registration Form'])[2]/following::input[1]</option><option>//input[@id='name']</option><option>//form[@id='register']/div/div/input</option><option>//input</option><option>css=#name</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=name<datalist><option>id=name</option><option>name=name</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Registration Form'])[2]/following::input[1]</option><option>//input[@id='name']</option><option>//form[@id='register']/div/div/input</option><option>//input</option><option>css=#name</option></datalist></td><td>RegisterTestU4ser23</td>
+</tr>
+<tr><td>type</td><td>id=email<datalist><option>id=email</option><option>name=email</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Registration Form'])[2]/following::input[2]</option><option>//input[@id='email']</option><option>//form[@id='register']/div[2]/div/input</option><option>//div[2]/div/input</option><option>css=#email</option></datalist></td><td>registeasrm2ail@mail.mail1</td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Registration Form'])[2]/following::input[3]</option><option>//input[@id='password']</option><option>//form[@id='register']/div[3]/div/input</option><option>//div[3]/div/input</option><option>css=#password</option></datalist></td><td>pass1234</td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Registration Form'])[2]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Registration Form'])[2]/following::button[1]</option><option>//button[@type='submit']</option><option>//form[@id='register']/div[4]/div/button</option><option>//div/button</option><option>css=button.btn.btn-primary.btn-block</option></datalist></td><td></td>
+</tr>
+<tr><td>assertTextPresent</td><td><datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Registration Form'])[2]/following::span[1]</option><option>//form[@id='register']/span</option><option>//form/span</option><option>css=#register &gt; span</option><option></option></datalist></td><td>User has been registered successfully</td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Register'])[1]/following::button[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Register'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Login'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Registration Form'])[2]/preceding::button[1]</option><option>//button[@type='Submit']</option><option>//form/button</option><option>css=button.btn.btn-md.btn-warning.btn-block</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=name<datalist><option>id=name</option><option>name=name</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Welcome'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Go To Registration Page'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Login'])[3]/preceding::input[2]</option><option>//input[@id='name']</option><option>//input</option><option>css=#name</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=name<datalist><option>id=name</option><option>name=name</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Welcome'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Go To Registration Page'])[1]/following::input[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Login'])[3]/preceding::input[2]</option><option>//input[@id='name']</option><option>//input</option><option>css=#name</option></datalist></td><td>RegisterTestU4ser23</td>
+</tr>
+<tr><td>type</td><td>id=password<datalist><option>id=password</option><option>name=password</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Welcome'])[1]/following::input[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Go To Registration Page'])[1]/following::input[2]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Login'])[3]/preceding::input[1]</option><option>//input[@id='password']</option><option>//input[2]</option><option>css=#password</option></datalist></td><td>pass1234</td>
+</tr>
+<tr><td>click</td><td>name=Submit<datalist><option>name=Submit</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Welcome'])[1]/following::button[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Go To Registration Page'])[1]/following::button[1]</option><option>//button[@name='Submit']</option><option>//div[3]/form/button</option><option>css=button[name="Submit"]</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Register'])[1]/following::div[1]<datalist><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Register'])[1]/following::div[1]</option><option>xpath=(.//*[normalize-space(text()) and normalize-space(.)='Login'])[1]/following::div[1]</option><option>//body/div[2]</option><option>css=div.container</option></datalist></td><td></td>
+</tr>
+<tr><td>assertTextPresent</td><td><datalist><option></option></datalist></td><td>Welcome RegisterTestUser (registermail@mail.mail)</td>
+</tr>
+</tbody></table>
+</body>
+</html>
