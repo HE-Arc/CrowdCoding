@@ -82,7 +82,6 @@ public class SnippetController {
 			return new ModelAndView("error/404"); 
 		
 		//Optional<User> oUser = userService.findUserById(user);
-		
 		CodeSnippet snippet = oSnippet.get();
 		snippet.setName(name);
 		snippet.setLanguage(language);
