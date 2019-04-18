@@ -9,23 +9,20 @@
 	<div class="container">
 		<h1>Create a snippet</h1>
 	</div>
-	<form method="POST" th:action="@{/add}" th:object="${newCodeSnippet}">
-      <input type="text" placeholder="Name of the Snippet" class="u-full-width" th:field="*{name}" />
-		<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name errors</span>
+	<form method="post" action="/snippets/add">
+      	<input type="text" placeholder="Name of the Snippet" class="u-full-width" name="snippet_name" />
 		
-		<select th:field="*{language}">
+		<select name="snippet_language">
 			<option value="" disabled selected>Language of the Snippet</option>
 		    <option th:value="'Python'" th:text="Python"></option>
 		    <option th:value="'TP4'" th:text="TP4"></option>
 		</select>
-		<span th:if="${#fields.hasErrors('language')}" th:errors="*{language}">Language errors</span>
 		
-		<select th:field="*{accessibility}">
+		<select name="snippet_accessibility">
 			<option value="" disabled selected>Accessibility of the Snippet</option>
 		    <option th:value="'Public'" th:text="Public"></option>
 		    <option th:value="'Private'" th:text="Private"></option>
 		</select>
-		<span th:if="${#fields.hasErrors('accessibility')}" th:errors="*{accessibility}">Accessibility errors</span>
 		
 		<button type="submit">Create new Code Snippet</button>
 	</form>

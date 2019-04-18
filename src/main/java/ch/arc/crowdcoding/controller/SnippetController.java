@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import ch.arc.crowdcoding.model.CodeSnippet;
 import ch.arc.crowdcoding.model.User;
@@ -55,18 +56,25 @@ public class SnippetController {
 	
 	//Add to db and redirect to modifiy
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String addNewSnippet(@RequestParam("newCodeSnippet") CodeSnippet codeSnippet)
+	public RedirectView addNewSnippet(
+			@RequestParam("snippet_name") String name,
+			@RequestParam("snippet_language") String language,
+			@RequestParam("snippet_accessibility") String accessibility)
 	{
 		//Current authenticated user
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     	String currentPrincipal = authentication.getName();
     	User currentUser = userService.findUserByName(currentPrincipal);
     	
+    	CodeSnippet codeSnippet = new CodeSnippet();
+    	codeSnippet.setName(name);
+    	codeSnippet.setLanguage(language);
+    	codeSnippet.setAccessibility(accessibility);
 		codeSnippet.setOwner(currentUser);
 		codeSnippet.setContent("");
 		codeSnippet = snippetRepository.save(codeSnippet);
 		
-		return "snippets/"+codeSnippet.getId()+"/edit";
+		return new RedirectView("/snippets/"+codeSnippet.getId()+"/edit");
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
@@ -102,7 +110,7 @@ public class SnippetController {
 		if(!oSnippet.isPresent())
 			return new ModelAndView("error/404");
 		
-		ModelAndView mav = new ModelAndView("snippets/editor");
+		ModelAndView mav = new ModelAndView("snippets/edit");
         mav.addObject("snippet", oSnippet.get());
         
 		return mav;
