@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import ch.arc.crowdcoding.model.User;
+
 public class SecurityServiceImpl implements SecurityService {
 
 	@Autowired
@@ -16,6 +18,9 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private UserService userService;
 
 	private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
@@ -41,5 +46,10 @@ public class SecurityServiceImpl implements SecurityService {
 			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 			logger.debug(String.format("Auto login %s successfully!", username));
 		}
+	}
+
+	@Override
+	public User findLoggedInUser() {
+		return userService.findUserByName(findLoggedInUsername());
 	}
 }
