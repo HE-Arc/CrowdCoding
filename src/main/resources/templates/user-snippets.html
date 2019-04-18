@@ -11,6 +11,15 @@
 
 	<div class="container">
 		<h1>My Snippets</h1>
+		
+		<div th:each="snippet : ${snippets}">
+			<p th:text="{snippet.language}"></p>
+	        <!--<td th:text="snippet">1</td>
+	        <td><a href="#" th:text="snippet">Title ...</a></td>
+	        <td th:text="${snippet.text}">Text ...</td> -->
+	    </div>
+	    
+	    <p th:text="${aa}">aaa</p>
 	</div>
 	<div th:insert="fragments/footer :: footer"></div>
 </body>

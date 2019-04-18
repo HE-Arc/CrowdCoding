@@ -34,11 +34,11 @@ public class HomeController {
         return "greeting";
     }
     
-    @GetMapping("/me/snippets")
-    public String getUserSnippets()
-    {
-    	return "user-snippets";
-    }
+//    @GetMapping("/me/snippets")
+//    public String getUserSnippets()
+//    {
+//    	return "user-snippets";
+//    }
    
     
 	@GetMapping("/all")
