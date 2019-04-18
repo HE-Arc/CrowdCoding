@@ -45,9 +45,12 @@ public class SnippetController {
 	}
 	
 	@RequestMapping(value="/new", method=RequestMethod.GET)
-	public String getNewSnippetForm()
+	public ModelAndView getNewSnippetForm()
 	{
-		return "snippets/new";
+		ModelAndView mav = new ModelAndView("snippets/new");
+		mav.addObject("newCodeSnippet", new CodeSnippet());
+		
+		return mav;
 	}
 	
 	//Add to db and redirect to modifiy
@@ -78,7 +81,7 @@ public class SnippetController {
 		if(!oSnippet.isPresent())
 			return new ModelAndView("error/404"); 
 		
-		Optional<User> oUser = userService.findUserById(user);
+		//Optional<User> oUser = userService.findUserById(user);
 		
 		CodeSnippet snippet = oSnippet.get();
 		snippet.setName(name);
@@ -88,7 +91,7 @@ public class SnippetController {
 		snippet.setAccessibility(access);
 		
 		
-		snippet.setOwner(currentUser);
+		//snippet.setOwner(currentUser);
 		snippet = snippetRepository.save(snippet);
 		
 		return null;// "snippets/"+snippet.getId()+"/edit";
