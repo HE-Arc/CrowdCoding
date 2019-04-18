@@ -96,14 +96,13 @@ public class SnippetController {
 								@RequestParam("snippet_language") String language, @RequestParam("snippet_accessibility") String access)
 	{    	
 		
-		CodeSnippet snippet= snippetService.updateSnippet(id, name, content, userService.findUserById(id), languageService.findByLanguage(language), access);
+		CodeSnippet snippet= snippetService.updateSnippet(id, name, content, userService.findUserById(user), languageService.findByLanguage(language), access);
 		
 		if(snippet==null)
 			return new ModelAndView("error/404"); 
 		
 		return null;// "snippets/"+snippet.getId()+"/edit";
 	}
-	
 	
 	@RequestMapping("/{id}/edit")
 	public ModelAndView getEditorSnippetForm(@PathVariable(value="id") Integer id)

@@ -7,7 +7,8 @@
 	crossorigin="anonymous"></script>
 <head>
 <title>Snippet Editor</title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/codeEditor.js}"></script>
 <style type="text/css" media="screen">
 .ace_editor {
 	border: 1px solid lightgray;
@@ -23,7 +24,6 @@
 }
 </style>
 
-
 </head>
 <body>
 	<div th:insert="fragments/header :: header"></div>
@@ -37,7 +37,7 @@
 			<p>
 				<label for="snippetLanguage">Language</label> <input type="text"
 					class="form-control" id="snippetLanguage"
-					th:value="${snippet.language}">
+					th:value="${snippet.language.language}">
 			</p>
 			<p>
 				<label for="snippetAccessibility">Accessibility</label> <input
@@ -49,12 +49,15 @@
 
 	</div>
 	<div class="container">
+		<input type="hidden" name="snippetId" th:value="${snippet.id}">
+		<input type="hidden" name="ownerId" th:value="${snippet.owner.id}">
+		<!-- <input type="hidden" name="owner" th:value="12">-->
 		<pre id="editor1" th:text="${snippet.content}"></pre>
 		<div class="scrollmargin"></div>
 
 		<div class="row">
-			<button class="col-sm-2 offset-md-3 btn btn-primary">Save</button>
-			<button class="col-sm-2 offset-md-2	 btn btn-primary">Execute</button>
+			<button class="col-sm-2 offset-md-3 btn btn-primary" id="btnSave">Save</button>
+			<button class="col-sm-2 offset-md-2	 btn btn-primary" id="btnExecute">Execute</button>
 		</div>
 
 		<label for="executionOutput" class="display-4">Output</label>
