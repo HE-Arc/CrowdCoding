@@ -55,21 +55,18 @@ public class SnippetController {
 	
 	//Add to db and redirect to modifiy
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String addNewSnippet(@RequestParam("snippet_name") String name, 
-								@RequestParam("snippet_language") String language)
+	public String addNewSnippet(@RequestParam("newCodeSnippet") CodeSnippet codeSnippet)
 	{
 		//Current authenticated user
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     	String currentPrincipal = authentication.getName();
     	User currentUser = userService.findUserByName(currentPrincipal);
     	
-		CodeSnippet snippet = new CodeSnippet();
-		snippet.setName(name);
-		snippet.setLanguage(language);
-		snippet.setOwner(currentUser);
-		snippet = snippetRepository.save(snippet);
+		codeSnippet.setOwner(currentUser);
+		codeSnippet.setContent("");
+		codeSnippet = snippetRepository.save(codeSnippet);
 		
-		return "snippets/"+snippet.getId()+"/edit";
+		return "snippets/"+codeSnippet.getId()+"/edit";
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
