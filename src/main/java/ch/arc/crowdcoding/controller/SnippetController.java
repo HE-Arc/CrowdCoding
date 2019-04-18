@@ -5,17 +5,27 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import ch.arc.crowdcoding.model.CodeSnippet;
 import ch.arc.crowdcoding.model.User;
 import ch.arc.crowdcoding.service.SecurityService;
 import ch.arc.crowdcoding.service.SnippetService;
+import ch.arc.crowdcoding.repository.SnippetRepository;
+import ch.arc.crowdcoding.service.SnippetExecutionService;
+import org.springframework.web.bind.annotation.RequestParam;
+import ch.arc.crowdcoding.model.User;
 import ch.arc.crowdcoding.service.UserService;
 
 @Controller
@@ -25,10 +35,14 @@ public class SnippetController {
 	@Autowired
 	private SnippetService snippetService;
 	@Autowired
+	private SnippetExecutionService snippetExecutor;
+	
+	@Autowired
 	private UserService userService;
 	@Autowired
 	private SecurityService securityService;
 	
+
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView snippetsList()
 	{
@@ -52,15 +66,18 @@ public class SnippetController {
 	
 	//Add to db and redirect to modifiy
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String addNewSnippet(@RequestParam("newCodeSnippet") CodeSnippet codeSnippet)
+	public RedirectView addNewSnippet(
+			@RequestParam("snippet_name") String name,
+			@RequestParam("snippet_language") String language,
+			@RequestParam("snippet_accessibility") String accessibility)
 	{
 		//Current authenticated user 
 		//Maybe check if currentUser is not defined ?
     	User currentUser = securityService.findLoggedInUser();
     	
-    	codeSnippet = snippetService.createNewSnippet(currentUser, codeSnippet.getLanguage(), codeSnippet.getAccessibility());
+    	CodeSnippet snippet = snippetService.createNewSnippet(currentUser, language, accessibility);
 		
-		return "snippets/"+codeSnippet.getId()+"/edit";
+		return new RedirectView("/snippets/"+snippet.getId()+"/edit");
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
@@ -85,10 +102,28 @@ public class SnippetController {
 		if(snippet == null)
 			return new ModelAndView("error/404");
 		
-		ModelAndView mav = new ModelAndView("snippets/editor");
+		ModelAndView mav = new ModelAndView("snippets/edit");
         mav.addObject("snippet", snippet);
         
 		return mav;
 	}
 	
+	@RequestMapping(value="{id}/execute", method=RequestMethod.GET, produces = "application/json")
+	@ResponseBody public String executeSnippet(@PathVariable(value="id") Integer id)
+	{
+		CodeSnippet codeSnippet = snippetService.findById(id);
+		String jsonOutput = "";
+		
+		if(codeSnippet != null)
+			jsonOutput = snippetExecutor.runSnippet(codeSnippet);
+		return jsonOutput;
+		/*String codeTxt = "print('asd')";
+				
+		
+		CodeSnippet snippet = new CodeSnippet();
+		snippet.setContent(codeTxt);
+		
+		String output = snippetExecutor.runSnippet(snippet);
+		return output;*/
+	}
 }

@@ -5,11 +5,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import ch.arc.crowdcoding.model.CodeSnippet;
 import ch.arc.crowdcoding.model.User;
 import ch.arc.crowdcoding.repository.SnippetRepository;
 
+@Service("snippetService")
 public class SnippetServiceImpl implements SnippetService {
 
 	@Autowired
