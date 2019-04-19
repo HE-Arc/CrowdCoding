@@ -6,7 +6,30 @@
 <body>
     <div th:insert="fragments/header :: header"></div>
     <div class="container">
-    	<p>Get your greeting <a href="/admin/home">here</a></p>
+    	<span class="display-2">Welcome on CrowdCoding!</span>
+    	<p class="text-muted font-italic border-bottom ml-4">The number 1 most used by the all around the world developers online code sharing and online code running web application.</p>
+    	<p class="text-center"><span class="display-3">CrowdCoding</span><span class="display-4 text-muted font-italic"> - Online Everything</span></p>
+    	<div class="row text-center mt-5">
+    		<div class="col  bg-light">
+    			<h3>Online coding</h3>
+    			<p><img class="rounded img-fluid" th:src="@{coding.gif}" width="90%"></img></p>
+    			<span class="text-muted">Develop the next big thing with our extremely complex and complete online code editor</span>
+    			
+    		</div>
+    		<div class="col">
+    			<h3>Online code running</h3>
+    			<p><img class="rounded img-fluid" th:src="@{running.gif}" width="90%"></img><p>
+    			<span class="text-muted">Run all your programs online! No more CPU spikes or blue screens because of your <kbd>while(true)</kbd> or <kbd>sigsegv</kbd>!</span>
+    			
+    		</div>
+    		<div class="col bg-light">
+    			<h3>Online satisfaction</h3>
+    			<p><img class="rounded img-fluid" th:src="@{satisfaction.gif}" width="90%"></img></p>
+    			<span class="text-muted">Step 3: ??? Step 4: Profit! Enjoy the income that our specialized web application can help you attain!</span>
+    			
+    		</div>
+    	</div> 
+    	
     </div>
     <div th:insert="fragments/footer :: footer"></div>
 </body>
