@@ -7,7 +7,8 @@
 	crossorigin="anonymous"></script>
 <head>
 <title>Snippet Editor</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" th:src="@{/js/codeEditor.js}"></script>
 <style type="text/css" media="screen">
 .ace_editor {
@@ -29,7 +30,8 @@
 	<div th:insert="fragments/header :: header"></div>
 
 	<div class="container">
-		<div class="form-group">
+		<div class="form-group mt-1">
+			<h1>Snippet Editor</h1>
 			<p>
 				<label for="snippetName">Name</label> <input type="text"
 					class="form-control" id="snippetName" th:value="${snippet.name}">
@@ -60,8 +62,10 @@
 			<button class="col-sm-2 offset-md-2	 btn btn-primary" id="btnExecute">Execute</button>
 		</div>
 
-		<label for="executionOutput" class="display-4">Output</label>
-		<div class="bg-light" id="executionOutput">None</div>
+		<label for="executionOutputContainer" class="display-4">Output</label>
+		<div class="bg-light" id="executionOutputContainer" >
+			<pre id="executionOutput">None</pre>
+		</div>
 
 		<div th:insert="fragments/footer :: footer"></div>
 	</div>
@@ -72,7 +76,7 @@
 	var editor1 = ace.edit("editor1", {
 		theme : "ace/theme/monokai",
 		mode : "ace/mode/python",
-		minLines : 15,
+		minLines : 20,
 		maxLines : 30,
 		wrap : true,
 		autoScrollEditorIntoView : true
