@@ -45,7 +45,7 @@ public class SnippetExecutionServiceImpl implements SnippetExecutionService {
 		CodeProcessTask process = new CodeProcessTask();
 		process.filename = filename;
 		process.command = "python";
-		
+	
 		Future<String> future = executor.submit(process);
 		
 		try {
@@ -86,7 +86,6 @@ public class SnippetExecutionServiceImpl implements SnippetExecutionService {
 				process.waitFor(CODE_PROCESS_TIMEOUT, TimeUnit.SECONDS);
 				output = outputBuilder(process);
 			} catch (InterruptedException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -95,15 +94,22 @@ public class SnippetExecutionServiceImpl implements SnippetExecutionService {
 		
 	}
 	
-	private static String outputBuilder(Process endedProcess)
+	private static String outputBuilder(Process endedProcess) throws IOException
 	{
 		JSONObject executionOutput = new JSONObject();
 			
 		BufferedReader in = new BufferedReader(new InputStreamReader(endedProcess.getInputStream()));
 		String progOutput = in.lines().collect(Collectors.joining("\n"));
 		
+		BufferedReader errorInput = new BufferedReader(new InputStreamReader(endedProcess.getErrorStream()));
+		String progError = errorInput.lines().collect(Collectors.joining("\n"));
+			
 		executionOutput.put("output", progOutput);
+		executionOutput.put("error", progError);
 		executionOutput.put("status", endedProcess.exitValue());
+		
+		in.close();
+		errorInput.close();
 		
 		return executionOutput.toString();
 	}

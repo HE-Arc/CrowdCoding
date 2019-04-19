@@ -8,23 +8,41 @@
 	<div th:insert="fragments/header :: header"></div>
 	<div class="container">
 		<h1>Create a snippet</h1>
+		<div class="form-group">
+			<form method="post" action="/snippets/add">
+				<p>
+					<label for="snippetInputName">Name</label> <input
+						type="text" placeholder="Name of the Snippet"
+						class="u-full-width form-control" name="snippet_name"
+						id="snippetInputName" />
+				</p>
+				<p>
+					<label for="snippetInputLanguage">Language</label> <select
+						class="custom-select" name="snippet_language" id="snippetInputLanguage"><option
+							th:each="language : ${languages}" th:value="${language.language}"
+							th:text="${language.language}"></option>
+					</select>
+				</p>
+
+				<p>
+					<label for="snippetInputAccessibility">Accessibility</label> 
+					<select name="snippet_accessibility" class="custom-select" id="snippetInputAccessibility">
+						<option value="" disabled selected>Accessibility of the
+							Snippet</option>
+						<option th:value="'Public'" th:text="Public"></option>
+						<option th:value="'Private'" th:text="Private"></option>
+					</select>
+				</p>
+				<p>
+
+					<button type="submit" class="btn btn-primary button-primary u-full-width">Create
+						new Code Snippet</button>
+				</p>
+
+			</form>
+		</div>
 	</div>
-	<form method="post" action="/snippets/add">
-      	<input type="text" placeholder="Name of the Snippet" class="u-full-width" name="snippet_name" />
-		
-		<select name="snippet_language">
-			<option th:each="language : ${languages}" th:value="${language.language}" th:text="${language.language}"></option>
-		</select>
-		
-		<select name="snippet_accessibility">
-			<option value="" disabled selected>Accessibility of the Snippet</option>
-		    <option th:value="'Public'" th:text="Public"></option>
-		    <option th:value="'Private'" th:text="Private"></option>
-		</select>
-		
-		<button type="submit" class="button-primary u-full-width">Create new Code Snippet</button>
-	</form>
-	
+
 	<div th:insert="fragments/footer :: footer"></div>
 </body>
 </html>
