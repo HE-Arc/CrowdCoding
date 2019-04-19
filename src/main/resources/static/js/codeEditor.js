@@ -23,7 +23,7 @@ $(document).ready(function() {
 	{
 		snippetId = $("input[name=snippetId]").val();
 		name = $("#snippetName").val();
-		language = $("#snippetLanguage").val();
+		language = $("#snippetLanguageSelect").val()
 		accessibility = $("#snippetAccessiblity").val();
 		ownerId = $("input[name=ownerId]").val();
 		content = editor1.getValue();

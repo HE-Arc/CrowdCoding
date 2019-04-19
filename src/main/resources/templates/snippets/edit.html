@@ -37,9 +37,26 @@
 					class="form-control" id="snippetName" th:value="${snippet.name}">
 			</p>
 			<p>
-				<label for="snippetLanguage">Language</label> <input type="text"
+				<label for="snippetInputLanguage">Language</label> <select
+						class="custom-select" name="snippet_language" id="snippetLanguageSelect">
+						
+						<option th:if="${language.language != snippet.language.language}"
+							th:each="language : ${languages}" 
+							th:value="${language.language}"
+							th:text="${language.language}"
+							>
+						</option>
+						<option th:if="${language.language == snippet.language.language}"
+							th:each="language : ${languages}" 
+							th:value="${language.language}"
+							th:text="${language.language}"
+							selected="selected"
+							>
+						</option>
+				</select>
+				<!--<label for="snippetLanguage">Language</label> <input type="text"
 					class="form-control" id="snippetLanguage"
-					th:value="${snippet.language.language}">
+					th:value="${snippet.language.language}">-->
 			</p>
 			<p>
 				<label for="snippetAccessibility">Accessibility</label> <input
