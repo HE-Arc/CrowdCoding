@@ -113,6 +113,7 @@ public class SnippetController {
 		
 		ModelAndView mav = new ModelAndView("snippets/edit");
         mav.addObject("snippet", snippet);
+		mav.addObject("languages", languageService.findAll());
         
 		return mav;
 	}
@@ -126,13 +127,5 @@ public class SnippetController {
 		if(codeSnippet != null)
 			jsonOutput = snippetExecutor.runSnippet(codeSnippet);
 		return jsonOutput;
-		/*String codeTxt = "print('asd')";
-				
-		
-		CodeSnippet snippet = new CodeSnippet();
-		snippet.setContent(codeTxt);
-		
-		String output = snippetExecutor.runSnippet(snippet);
-		return output;*/
 	}
 }
