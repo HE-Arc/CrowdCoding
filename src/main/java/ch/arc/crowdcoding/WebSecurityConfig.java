@@ -51,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.
 		authorizeRequests()
+			.antMatchers("**static**").permitAll()
 			.antMatchers("/").permitAll()
 			.antMatchers("/login").permitAll()
 			.antMatchers("/registration").permitAll()
@@ -72,6 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    web
 	       .ignoring()
 	       .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+	    
 	}
 	
 	@Bean
