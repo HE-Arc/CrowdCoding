@@ -9,7 +9,7 @@
 <body>
 	<div th:insert="fragments/header :: header"></div>
 
-	<div class="container">
+	<div class="container text-center">
 		<h1>My Snippets</h1>
 		
 		<div th:each="snippet : ${snippets}">
@@ -33,6 +33,9 @@
 	        	</div>
 	        </a>
 	    </div>
+	    
+	    <a th:if="${previousPage != null}" th:href="@{'/user/snippets/' + ${previousPage} }">Previous</a>
+	    <a th:if="${nextPage != null}" th:href="@{'/user/snippets/' + ${nextPage} }">Next</a>
 	</div>
 	<div th:insert="fragments/footer :: footer"></div>
 </body>

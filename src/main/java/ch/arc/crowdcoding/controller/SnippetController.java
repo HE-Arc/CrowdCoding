@@ -48,16 +48,27 @@ public class SnippetController {
 	
 	
 	
-
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public ModelAndView snippetsList()
+	public RedirectView snippetsListEmpty()
 	{
+		return new RedirectView("/snippets/list/0");
+	}
+	
+	@RequestMapping(value="/list/{page}", method=RequestMethod.GET)
+	public ModelAndView snippetsList(@PathVariable(value="page") Integer page)
+	{
+		if(page < 0 )
+			page = 0;
 		
-		Pageable pageable = PageRequest.of(0, 10, Sort.by("createdAt").descending());
+		Pageable pageable = PageRequest.of(page, 4, Sort.by("createdAt").descending());
     	Page<CodeSnippet> snippets = snippetService.findByAccessibility("Public", pageable);
-    	
+   
     	ModelAndView mav = new ModelAndView("snippets/list");
     	mav.addObject("snippets", snippets);
+    	if(snippets.getTotalPages()-1 > page)
+    		mav.addObject("nextPage", page+1);
+    	if(page > 0)
+    		mav.addObject("previousPage", page-1);
     	
 		return mav;
 	}
@@ -95,7 +106,6 @@ public class SnippetController {
 								@RequestParam("snippet_content") String content, @RequestParam("snippet_user") Integer user,
 								@RequestParam("snippet_language") String language, @RequestParam("snippet_accessibility") String access)
 	{    	
-		
 		CodeSnippet snippet= snippetService.updateSnippet(id, name, content, userService.findUserById(user), languageService.findByLanguage(language), access);
 		
 		if(snippet==null)
