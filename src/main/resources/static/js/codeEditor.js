@@ -8,6 +8,17 @@ $(document).ready(function() {
 		saveCode();
 	})
 	
+	$(window).bind('keydown', function(event) {
+	    if (event.ctrlKey || event.metaKey) {
+	        switch (String.fromCharCode(event.which).toLowerCase()) {
+	        case 's':
+	            event.preventDefault();
+	            saveCode();
+	            break;
+	        }
+	    }
+	});
+	
 	function executeCode(snippetId) {
 		$.ajax({
 			url : window.location.origin+'/snippets/' + snippetId + '/execute',
