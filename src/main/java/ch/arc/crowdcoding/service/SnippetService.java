@@ -14,6 +14,8 @@ public interface SnippetService {
 	Page<CodeSnippet> findByAccessibility(String accessibility, Pageable pageable);
 	CodeSnippet findById(Integer id);
 	
+	boolean deleteSnippet(Integer id, User currentUser);
+	
 	CodeSnippet createNewSnippet(User owner, String Name, Language language, String accessibility);
 	CodeSnippet updateSnippet(Integer id, String name, String content, User owner, Language language, String accessibility);
 }

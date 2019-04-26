@@ -101,6 +101,7 @@ public class SnippetController {
 		return new RedirectView("/snippets/"+snippet.getId()+"/edit");
 	}
 	
+	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public ModelAndView saveSnippet(@RequestParam("snippet_id") Integer id, @RequestParam("snippet_name") String name,
 								@RequestParam("snippet_content") String content, @RequestParam("snippet_user") Integer user,

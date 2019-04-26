@@ -77,4 +77,19 @@ public class SnippetServiceImpl implements SnippetService {
 	public Page<CodeSnippet> findAll(Pageable pageable) {
 		return snippetRepository.findAll(pageable);
 	}
+
+	@Override
+	public boolean deleteSnippet(Integer id, User currentUser) {
+		Optional<CodeSnippet> oSnippet = snippetRepository.findById(id);
+		
+		if(!oSnippet.isPresent())
+			return false;
+		CodeSnippet snippet = oSnippet.get();
+		
+		if(snippet.getOwner().getId() != currentUser.getId())
+			return false;
+		
+		snippetRepository.delete(snippet);
+		return true;
+	}
 }

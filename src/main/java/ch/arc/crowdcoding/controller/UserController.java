@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -39,6 +41,21 @@ public class UserController {
 		return new RedirectView("/user/snippets/0");
 	}
 	
+	//Add to db and redirect to modifiy
+	@RequestMapping(value="snippets/delete", method=RequestMethod.POST)
+	public RedirectView deleteSnippet(@RequestParam("snippet_id") Integer id)
+	{	
+		//Current authenticated user 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		User currentUser = userService.findUserByName(currentPrincipalName);
+		
+    	snippetService.deleteSnippet(id, currentUser);
+		
+		return new RedirectView("/user/snippets");
+	}
+		
+	
     @RequestMapping(value = "/snippets/{page}", method=RequestMethod.GET)
     public ModelAndView getSnippets(@PathVariable(value="page") Integer page)
     {
@@ -49,9 +66,10 @@ public class UserController {
 		String currentPrincipalName = authentication.getName();
 		User currentUser = userService.findUserByName(currentPrincipalName);
 		
-    	Pageable pageable = PageRequest.of(page, 5);
+    	Pageable pageable = PageRequest.of(page, 5, Sort.by("createdAt").ascending());
     	Page<CodeSnippet> snippets = snippetService.findByOwner(currentUser, pageable);
-    	
+    	System.out.println(snippets.getContent().get(0).getCreatedAt());
+    	System.out.println(snippets.getContent().get(1).getCreatedAt());
     	ModelAndView mav = new ModelAndView("user-snippets");
         mav.addObject("snippets", snippets);
         if(snippets.getTotalPages()-1 > page)

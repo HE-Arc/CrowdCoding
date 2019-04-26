@@ -14,9 +14,18 @@
 		
 		<div th:each="snippet : ${snippets}">
 			<a th:href="@{'/snippets/' + ${snippet.id} + '/edit'}" class="btn" style="width: 50%;">
-				<div class="card">
-					<div class="card-header text-left">
-						<h4 th:text="${snippet.name}"></h4>
+				<div class="card container">
+					<div class="card-header text-left row">
+						<h4 class="col" th:text="${snippet.name}"></h4>
+						<form class="col text-right" method="post" action="delete">
+							<input type="hidden" name="snippet_id" th:value="${snippet.id}" />
+							<button type="submit" class="btn btn-light">
+								<img class="rounded img-fluid" th:src="@{/Garbage.png}"
+									width="20px" height="20px" alt=""></img>
+								<!-- Icon made by https://www.flaticon.com/authors/eleonor-wang from www.flaticon.com  -->
+
+							</button>
+						</form>
 					</div>
 					<div class="card-body">
 						<div class="row">

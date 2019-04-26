@@ -63,9 +63,16 @@
 					type="text" class="form-control" id="snippetAccessiblity"
 					th:value="${snippet.accessibility}">
 			</p>
+			<form class="col text-right" method="post" action="delete" th:if="${#authentication.name} == ${snippet.owner.name}">
+				<input type="hidden" name="snippet_id" th:value="${snippet.id}" />
+				<span class="text-muted">Delete</span> <button type="submit" class="btn btn-light">
+					<img class="rounded img-fluid" th:src="@{/Garbage.png}"
+						width="20px" height="20px" alt=""></img>
+					<!-- Icon made by https://www.flaticon.com/authors/eleonor-wang from www.flaticon.com  -->
+				</button>
+			</form>
 		</div>
-
-
+		
 	</div>
 	<div class="container">
 		<input type="hidden" name="snippetId" th:value="${snippet.id}">
