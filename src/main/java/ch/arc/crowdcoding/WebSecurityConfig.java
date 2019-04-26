@@ -51,8 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.
 		authorizeRequests()
-			.antMatchers("**static**").permitAll()
-			.antMatchers("/").permitAll()
+			.antMatchers("/*.png", "/*.gif", "/*.ico").permitAll()
+			.antMatchers("/", ".png").permitAll()
 			.antMatchers("/login").permitAll()
 			.antMatchers("/registration").permitAll()
 			.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
