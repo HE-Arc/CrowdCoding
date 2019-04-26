@@ -43,9 +43,11 @@
 					<li class="nav-item active"><a class="nav-link"
 						th:href="@{/logout}">Logout</a>
 					</li>
-					<li class="nav-item active"><a class="nav-link"
-						th:href="@{/admin/languages}">Admin</a>
-					</li>
+					
+						<li class="nav-item active" sec:authorize="hasAuthority('ADMIN')"><a class="nav-link"
+							th:href="@{/admin/languages}">Admin</a>
+						</li>
+					
 				</ul>
 			</div>
 		</div>
