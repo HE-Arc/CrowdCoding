@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ch.arc.crowdcoding.model.CodeSnippet;
+import ch.arc.crowdcoding.model.Role;
 import ch.arc.crowdcoding.model.User;
+import ch.arc.crowdcoding.repository.RoleRepository;
 import ch.arc.crowdcoding.service.LanguageService;
 import ch.arc.crowdcoding.service.SecurityService;
 import ch.arc.crowdcoding.service.SnippetService;
@@ -52,6 +54,29 @@ public class AdminController {
     {		
     	languageService.addLanguage(name);
     	return new ModelAndView("redirect:/admin/languages");
+    }
+    
+    @RequestMapping(value = "/admins")
+    public ModelAndView getAdmins()
+    {		    	
+    	ModelAndView mav = new ModelAndView("admin/admins");
+        mav.addObject("admins", userService.findAllAdmin());
+    	
+        return mav;
+    }
+    
+    @RequestMapping(value = "/admins/add", method=RequestMethod.POST)
+    public ModelAndView addAdmin(@RequestParam("user_name") String name)
+    {		
+    	userService.setAdmin(name);
+    	return new ModelAndView("redirect:/admin/admins");
+    }
+    
+    @RequestMapping(value = "/admins/revoke", method=RequestMethod.POST)
+    public ModelAndView revokeAdmin(@RequestParam("user_id") Integer id)
+    {		
+    	userService.revokeAdmin(id);
+    	return new ModelAndView("redirect:/admin/admins");
     }
   
 

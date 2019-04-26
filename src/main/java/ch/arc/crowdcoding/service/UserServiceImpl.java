@@ -56,4 +56,38 @@ public class UserServiceImpl implements UserService{
 			return null;
 	}
 
+	@Override
+	public boolean setAdmin(String username) {
+		User user = userRepository.findByName(username);
+		if(user == null)
+			return false;
+		
+		Role userRole = roleRepository.findByRole("USER");
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        userRepository.save(user);
+        return true;
+	}
+	
+	@Override
+	public boolean revokeAdmin(Integer id) {
+		Optional<User> oUser = userRepository.findById(id);
+		if(!oUser.isPresent())
+			return false;
+		
+		User user = oUser.get();
+		
+		Role userRole = roleRepository.findByRole("USER");
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        userRepository.save(user);
+        return true;
+	}
+
+	@Override
+	public Iterable<User> findAllAdmin() {
+		Iterable<User> admins = userRepository.findByRoles(roleRepository.findByRole("ADMIN"));
+		return admins;
+	}
+
+
+
 }

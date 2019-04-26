@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>CrowdCoding - Admin Page</title>
+</head>
+
+<body>
+<div th:insert="fragments/header :: header"></div>
+	<div class="container">
+		<table>
+            <thead>
+                <tr>
+                    <th>Admins</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${admins}">
+                    <td th:text="${user.name}"></td>
+                    <td><form method="post" action="admins/revoke">
+				      	<input type="hidden" name="user_id" th:value="${user.id}" />
+						<button type="submit" class="button-primary u-full-width">Revoke</button>
+						</form>
+					<td>
+                </tr>
+            </tbody>
+        </table>
+		
+		<form method="post" action="admins/add">
+	      	<input type="text" placeholder="Username of the user" class="u-full-width" name="user_name" />
+			
+			<button type="submit" class="button-primary u-full-width">Add admin</button>
+		</form>
+	</div>
+	<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>
