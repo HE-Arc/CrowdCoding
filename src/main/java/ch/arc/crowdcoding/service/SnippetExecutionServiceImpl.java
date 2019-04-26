@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -17,6 +19,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import ch.arc.crowdcoding.model.CodeSnippet;
+import ch.arc.crowdcoding.model.Language;
 
 @Service("snippetExecutor")
 public class SnippetExecutionServiceImpl implements SnippetExecutionService {
@@ -24,12 +27,11 @@ public class SnippetExecutionServiceImpl implements SnippetExecutionService {
 	public String runSnippet(CodeSnippet snippet) {
 		
 		String codeContent = snippet.getContent();
-		String filename = "code.py";
+		Map<String,String> languageParams = getLanguageParameters(snippet.getLanguage());
+		
 		String output = "";
 		
-		File inputFile = new File(filename);
-		
-		
+		File inputFile = new File(languageParams.get("filename"));	
 		BufferedWriter out;
 		try {
 			out = new BufferedWriter(new FileWriter(inputFile));
@@ -43,8 +45,8 @@ public class SnippetExecutionServiceImpl implements SnippetExecutionService {
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 		
 		CodeProcessTask process = new CodeProcessTask();
-		process.filename = filename;
-		process.command = "python";
+		process.filename = languageParams.get("filename");
+		process.command = languageParams.get("command");
 	
 		Future<String> future = executor.submit(process);
 		
@@ -64,6 +66,19 @@ public class SnippetExecutionServiceImpl implements SnippetExecutionService {
 		
 		
 		return output;
+	}
+	
+	private Map<String,String> getLanguageParameters(Language language)
+	{
+		Map<String,String> parameters = new HashMap<String,String>();
+		switch(language.getLanguage())
+		{
+		case "Python":
+			parameters.put("command", "python");
+			parameters.put("filename", "code.py");
+		}
+		
+		return parameters;
 	}
 	
 

@@ -52,7 +52,7 @@ public class SnippetServiceImpl implements SnippetService {
 		if(snippet == null)
 			return null;
 		
-		snippet.setOwner(owner);
+		//snippet.setOwner(owner);
 		snippet.setContent(content);
 		snippet.setAccessibility(accessibility);
 		snippet.setLanguage(language);

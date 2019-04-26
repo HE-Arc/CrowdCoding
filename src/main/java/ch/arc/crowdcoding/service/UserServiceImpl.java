@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService{
 		if(user == null)
 			return false;
 		
-		Role userRole = roleRepository.findByRole("USER");
+		Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
         return true;
