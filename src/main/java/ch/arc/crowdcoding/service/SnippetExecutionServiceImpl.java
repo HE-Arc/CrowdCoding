@@ -32,11 +32,8 @@ public class SnippetExecutionServiceImpl implements SnippetExecutionService {
 		String output = "";
 		
 		File inputFile = new File(languageParams.get("filename"));	
-		BufferedWriter out;
-		try {
-			out = new BufferedWriter(new FileWriter(inputFile));
+		try (BufferedWriter out = new BufferedWriter(new FileWriter(inputFile))){
 			out.write(codeContent);
-			out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,11 +56,13 @@ public class SnippetExecutionServiceImpl implements SnippetExecutionService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		executor.shutdown();
-		
-		inputFile.delete();
-		
+		finally
+		{
+			executor.shutdown();
+			
+			inputFile.delete();
+		}
+
 		
 		return output;
 	}

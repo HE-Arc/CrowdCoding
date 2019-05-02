@@ -86,7 +86,7 @@ public class SnippetServiceImpl implements SnippetService {
 			return false;
 		CodeSnippet snippet = oSnippet.get();
 		
-		if(snippet.getOwner().getId() != currentUser.getId())
+		if(!(snippet.getOwner().getId().equals(currentUser.getId())))
 			return false;
 		
 		snippetRepository.delete(snippet);

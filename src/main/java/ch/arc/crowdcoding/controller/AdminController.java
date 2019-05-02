@@ -39,7 +39,7 @@ public class AdminController {
 	private LanguageService languageService;
     
 
-    @RequestMapping(value = "/languages")
+    @RequestMapping(value = "/languages", method=RequestMethod.GET)
     public ModelAndView getLanguages()
     {		    	
     	ModelAndView mav = new ModelAndView("admin/languages");
@@ -56,7 +56,7 @@ public class AdminController {
     	return new ModelAndView("redirect:/admin/languages");
     }
     
-    @RequestMapping(value = "/admins")
+    @RequestMapping(value = "/admins", method=RequestMethod.GET)
     public ModelAndView getAdmins()
     {		    	
     	ModelAndView mav = new ModelAndView("admin/admins");
