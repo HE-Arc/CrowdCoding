@@ -68,8 +68,6 @@ public class UserController {
 		
     	Pageable pageable = PageRequest.of(page, 5, Sort.by("createdAt").ascending());
     	Page<CodeSnippet> snippets = snippetService.findByOwner(currentUser, pageable);
-    	System.out.println(snippets.getContent().get(0).getCreatedAt());
-    	System.out.println(snippets.getContent().get(1).getCreatedAt());
     	ModelAndView mav = new ModelAndView("user-snippets");
         mav.addObject("snippets", snippets);
         if(snippets.getTotalPages()-1 > page)
